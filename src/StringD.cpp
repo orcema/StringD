@@ -14,7 +14,7 @@ extern RemoteDebug Debug;
 StringD::StringD(char* StringToParase, const char* Delimiter){
 	StS=StringToParase;
 	delimiter=Delimiter;
-	pos_del=NULL;
+	//pos_del=NULL;
 	Process();
 }
 
@@ -44,12 +44,12 @@ void StringD::Process(){
 	Debug.printf("Number of nodes %d\r\n",nodes);
 
 	// prepare an array with the number of delimters and their position in the string
-	Debug.printf("Heap before free %d\r\n",ESP.getFreeHeap());
-	if(sizeof(pos_del)>0){free(pos_del);}
-	Debug.printf("Heap before after free %d\r\n",ESP.getFreeHeap());
-	int *pos_del=(int*) malloc(nodes*sizeof(int));
-	Debug.printf("Heap after malloc %d\r\n",ESP.getFreeHeap());
-	Debug.printf("Size of pointer %d\r\n",sizeof(pos_del));
+//	Debug.printf("Heap before free %d\r\n",ESP.getFreeHeap());
+//	if(sizeof(pos_del)>0){free(pos_del);}
+//	Debug.printf("Heap before after free %d\r\n",ESP.getFreeHeap());
+//	int *pos_del=(int*) malloc(nodes*sizeof(int));
+//	Debug.printf("Heap after malloc %d\r\n",ESP.getFreeHeap());
+//	Debug.printf("Size of pointer %d\r\n",sizeof(pos_del));
 //	int pos_del=(int*) malloc(nodes*sizeof(int));
 
 	// memorise the positions of the delimiters
