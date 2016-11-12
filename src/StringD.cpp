@@ -14,7 +14,7 @@ extern RemoteDebug Debug;
 StringD::StringD(char* StringToParase, const char* Delimiter){
 	StS=StringToParase;
 	delimiter=Delimiter;
-	//pos_del=NULL;
+	//m_pos_del=NULL;
 	Process();
 }
 
@@ -24,15 +24,15 @@ StringD::StringD(char* StringToParase, const char* Delimiter){
  */
 void StringD::Process(){
 
-	//determine the number of nodes
+	//determine the number of m_nodes
 	unsigned int pos=1;
 	unsigned int prev_pos=0;
 
-	nodes=0; // initialise number of nodes
+	m_nodes=0; // initialise number of m_nodes
 	while(StS.indexOf(delimiter,pos)!=-1){
 		if (pos>prev_pos){
-			// there one more node increment variable of number of nodes
-			nodes++;
+			// there one more node increment variable of number of m_nodes
+			m_nodes++;
 			prev_pos=pos; // memorise the current position of the delimiter
 
 			Debug.println(StS.indexOf(delimiter,pos));
@@ -41,53 +41,55 @@ void StringD::Process(){
 		}
 		yield();
 	}
-	Debug.printf("Number of nodes %d\r\n",nodes);
+	Debug.printf("Number of m_nodes %d\r\n",m_nodes);
 
 
 	// memorise the positions of the delimiters
 	pos=1;
 	prev_pos=0;
-	nodes=0; // initialise number of nodes
+	m_nodes=0; // initialise number of m_nodes
 
 	while(StS.indexOf(delimiter,pos)!=-1){
 		if (pos>prev_pos){
-			// there one more node increment variable of number of nodes
+			// there one more node increment variable of number of m_nodes
 
 			prev_pos=pos; // memorise the current position of the delimiter
 
 			Debug.println(StS.indexOf(delimiter,pos));
 
-			pos_del[nodes]=StS.indexOf(delimiter,pos);//move start position for next search
-			pos=pos_del[nodes]+1;
+			m_pos_del[m_nodes]=StS.indexOf(delimiter,pos);//move start position for next search
+			pos=m_pos_del[m_nodes]+1;
 
-			nodes++;
+			m_nodes++;
 		}
 		yield();
 	}
 
-	Debug.printf("Number of nodes %d\r\n",nodes);
+	Debug.printf("Number of m_nodes %d\r\n",m_nodes);
 
-	Debug.printf("Pointer address inside class of nodes var %x\r\n",&nodes);
+	Debug.printf("Pointer address inside class of m_nodes var %x\r\n",&m_nodes);
 
 
 }
 
 
 StringD::~StringD(){
-	//delete [] pos_del;
+	//delete [] m_pos_del;
 }
 
 void StringD::PrintPosDelimiters(){
 
 }
 
-int StringD::getnodes(){
-	Debug.printf("Number of nodes in class function getnodes %d\r\n",nodes);
+uint8_t StringD::max_node(){
+	Debug.printf("Number of m_nodes in class function getnodes %d\r\n",m_nodes);
 
-	return nodes;
+	return m_nodes;
 }
 
+String get_node(uint8_t node){
+//	if (node<1 || node>m_nodes){
 //
-//String StringD::Node(int position){
-//
-//}
+//	}
+}
+
