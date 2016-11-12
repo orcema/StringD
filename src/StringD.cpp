@@ -8,14 +8,18 @@
 #include <Arduino.h>
 
 #include <RemoteDebug.h>        //https://github.com/JoaoLopesF/RemoteDebug
-extern RemoteDebug Debug;
 
+#ifdef Debug_StringD
+	extern RemoteDebug Debug;
+#endif
 
 StringD::StringD(char* StringToParase, const char* Delimiter){
-	Debug.printf("length of char array = %d\r\n",sizeof(*StringToParase));
 	StS=StringToParase;
-	Debug.printf("length of StS  = %d\r\n",StS.length());
 	m_delimiter=Delimiter;
+
+	#ifdef Debug_StringD
+	ThisDebug.printf("length of StS  = %d with content %s\r\n",StS.length(),StS.c_str());
+	#endif
 	//m_pos_del=NULL;
 	Process();
 }
@@ -38,10 +42,9 @@ StringD::StringD(void* StringToParase, const char* Delimiter,int length){
  */
 void StringD::Process(){
 
-	//determine the number of m_nodes
+	//first while loop to determine the number of m_nodes
 	unsigned int pos=1;
 	unsigned int prev_pos=0;
-
 	m_nodes=0; // initialise number of m_nodes
 	while(StS.indexOf(m_delimiter,pos)!=-1){
 		if (pos>prev_pos){
@@ -49,16 +52,14 @@ void StringD::Process(){
 			m_nodes++;
 			prev_pos=pos; // memorise the current position of the m_delimiter
 
-			Debug.println(StS.indexOf(m_delimiter,pos));
+			//Debug.println(StS.indexOf(m_delimiter,pos));
 
 			pos=StS.indexOf(m_delimiter,pos)+1;//move start position for next search
 		}
 		yield();
 	}
-	Debug.printf("Number of m_nodes %d\r\n",m_nodes);
 
-
-	// memorise the positions of the m_delimiters
+	// next while loop to memorise the positions of the node delimiters
 	pos=1;
 	prev_pos=0;
 	m_nodes=0; // initialise number of m_nodes
@@ -68,9 +69,9 @@ void StringD::Process(){
 			// there one more node increment variable of number of m_nodes
 
 			prev_pos=pos; // memorise the current position of the m_delimiter
-
-			Debug.println(StS.indexOf(m_delimiter,pos));
-
+			#ifdef Debug_StringD
+				ThisDebug.println(StS.indexOf(m_delimiter,pos));
+			#endif
 			m_pos_del[m_nodes]=StS.indexOf(m_delimiter,pos);//move start position for next search
 			pos=m_pos_del[m_nodes]+1;
 
@@ -79,12 +80,10 @@ void StringD::Process(){
 		yield();
 	}
 	m_nodes++; // increment node by one for the last node
-
-	Debug.printf("Number of m_nodes %d\r\n",m_nodes);
-
-	Debug.printf("Pointer address inside class of m_nodes var %x\r\n",&m_nodes);
-
-
+	#ifdef Debug_StringD
+		ThisDebug.printf("Number of m_nodes %d\r\n",m_nodes);
+		Debug.printf("Pointer address inside class of m_nodes var %x\r\n",&m_nodes);
+	#endif
 }
 
 
@@ -97,8 +96,9 @@ void StringD::PrintPosDelimiters(){
 }
 
 uint8_t StringD::max_node(){
-	Debug.printf("Number of m_nodes in class function getnodes %d\r\n",m_nodes);
-
+	#ifdef Debug_StringD
+		ThisDebug.printf("Number of m_nodes in class function getnodes %d\r\n",m_nodes);
+	#endif
 	return m_nodes;
 }
 

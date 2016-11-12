@@ -8,7 +8,7 @@
 #ifndef LIB_STRINGD_SRC_STRINGD_H_
 #define LIB_STRINGD_SRC_STRINGD_H_
 
-
+// define Debug_StringD to get debugging
 
 
 #include "WString.h"
