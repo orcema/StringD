@@ -24,7 +24,7 @@ class StringD:public String {
 		//String Node(int position); // pointer to the
 		void PrintPosDelimiters(); // print the positions of the delimiters
 		int nodes; // number of nodes in the string
-		int pos_del[100]; //pointer for array of integer numbers. will be allocated at runtime
+		uint8_t pos_del[254]; //pointer for array of integer numbers. will be allocated at runtime
 		int getnodes();
 
 	private:
