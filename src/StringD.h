@@ -13,9 +13,9 @@
 #include "WString.h"
 
 
-class StringD:public String {
+class StringD {
 	public:
-		String delimiter; // node delimiter for split up of string content
+		String m_delimiter; // node m_delimiter for split up of string content
 		//StringD();
 
 		StringD(char* StringToParase, const char* Delimiter);
@@ -26,13 +26,14 @@ class StringD:public String {
 		int m_nodes; // number of nodes in the string
 		uint8_t m_pos_del[254]; //array of delimiter positions in the string
 		uint8_t max_node(); //getter function for the total number of nodes identified
-		String get_node(uint8_t node);// function to get a specific node
+		char* get_node(uint8_t node);// function to get a specific node
 
 	private:
 //		int m_StartPos; // start position of the node in the string
 //		int EndPos; // end position of the node in the string
 		void Process(); // analyse String content
 		String StS; // copy of String content to be analysed
+		int m_length; // data length to be analysed
 
 };
 
