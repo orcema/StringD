@@ -10,6 +10,7 @@
 
 
 
+
 #include "WString.h"
 
 
@@ -18,8 +19,9 @@ class StringD {
 		String m_delimiter; // node m_delimiter for split up of string content
 		//StringD();
 
-		StringD(char* StringToParase, const char* Delimiter);
 
+		StringD(char* StringToParase, const char* Delimiter);
+		StringD(void* StringToParase, const char* Delimiter,int length);
 		~StringD(); // destructor
 		//String Node(int position); // pointer to the
 		void PrintPosDelimiters(); // print the positions of the delimiters

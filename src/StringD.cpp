@@ -20,6 +20,18 @@ StringD::StringD(char* StringToParase, const char* Delimiter){
 	Process();
 }
 
+/**
+ * @brief Data to be splitted is of type void thus the length must also be set
+ * position of StringToParse
+ * @param StringToParase pointer of type void for the data to be splitted
+ * @param length  position to insert a null terminated string in the
+ */
+StringD::StringD(void* StringToParase, const char* Delimiter,int length){
+	memset((char*)StringToParase+length,0,1); // set the null character
+	StringD((char*)StringToParase,Delimiter);
+
+}
+
 
 /**
  * @brief Private function that is launched by constructor. Function performs an analysis of the String
