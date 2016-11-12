@@ -32,7 +32,14 @@ StringD::StringD(char* StringToParase, const char* Delimiter){
  */
 StringD::StringD(void* StringToParase, const char* Delimiter,int length){
 	memset((char*)StringToParase+length,0,1); // set the null character
-	StringD((char*)StringToParase,Delimiter);
+	StS=(char*)StringToParase;
+	m_delimiter=Delimiter;
+
+	#ifdef Debug_StringD
+	ThisDebug.printf("length of StS  = %d with content %s\r\n",StS.length(),StS.c_str());
+	#endif
+	//m_pos_del=NULL;
+	Process();
 
 }
 
@@ -114,7 +121,7 @@ char* StringD::get_node(uint8_t node){
 
 	if(node>1){
 		//set left boudary for node extract with an exception, always 0 for 1st node in string
-		left=m_pos_del[node-2]+1;
+		left=m_pos_del[node-2]+m_delimiter.length();
 	}
 
 
